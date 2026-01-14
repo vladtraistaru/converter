@@ -414,9 +414,15 @@ function formatNumber(num) {
     if (num === null || num === undefined || isNaN(num)) {
         return '—';
     }
+    // Scientific notation for very large numbers
+    if (Math.abs(num) >= 1e9) {
+        return num.toExponential(4);
+    }
+    // Formatted with commas for moderately large numbers
     if (Math.abs(num) >= 1000000) {
         return num.toLocaleString('en-US', { maximumFractionDigits: 2 });
     }
+    // Scientific notation for very small numbers
     if (Math.abs(num) < 0.0001 && num !== 0) {
         return num.toExponential(4);
     }
