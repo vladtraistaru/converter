@@ -9,7 +9,14 @@
 </head>
 <body>
     <div class="container">
-        <h1>Converter</h1>
+        <div class="title-row">
+            <h1>Converter</h1>
+            <label class="fun-toggle">
+                <input type="checkbox" id="fun-toggle">
+                <span class="toggle-slider"></span>
+                <span class="toggle-label">🎉 Fun Mode</span>
+            </label>
+        </div>
 
         <div class="type-row">
             <select id="converter-type" class="type-dropdown">
@@ -18,10 +25,7 @@
         </div>
 
         <div class="converter-card">
-            <div class="label-row">
-                <label class="row-label">From</label>
-                <button id="fun-toggle" class="fun-toggle">🎉 Fun</button>
-            </div>
+            <label class="row-label">From</label>
             <div class="value-row">
                 <input type="number" id="amount" value="1" min="0" step="any">
                 <select id="from-currency" class="unit-select"></select>

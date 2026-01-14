@@ -24,7 +24,10 @@ const UNITS_CONFIG = {
       "banana": { "name": "Bananas", "toBase": 0.178 },
       "bus": { "name": "London Buses", "toBase": 11.23 },
       "giraffe": { "name": "Giraffes", "toBase": 5.5 },
-      "statue": { "name": "Statues of Liberty", "toBase": 93 }
+      "statue": { "name": "Statues of Liberty", "toBase": 93 },
+      "paperclip": { "name": "Paper Clips", "toBase": 0.033 },
+      "lego": { "name": "LEGO Bricks (standard)", "toBase": 0.0318 },
+      "hotdog": { "name": "Hot Dogs (average)", "toBase": 0.15 }
     },
     "comparisons": [
       { "max": 0.01, "text": "width of a fingernail", "icon": "💅" },
@@ -61,7 +64,10 @@ const UNITS_CONFIG = {
       "cat": { "name": "House Cats", "toBase": 4.5 },
       "bowling": { "name": "Bowling Balls", "toBase": 6.35 },
       "iphone": { "name": "iPhones", "toBase": 0.206 },
-      "bananaW": { "name": "Bananas", "toBase": 0.12 }
+      "bananaW": { "name": "Bananas", "toBase": 0.12 },
+      "bagflour": { "name": "Bags of Flour (1kg)", "toBase": 1 },
+      "waterbottle": { "name": "Water Bottles (500ml)", "toBase": 0.5 },
+      "brick": { "name": "Bricks (standard)", "toBase": 2.7 }
     }
   },
   "temperature": {
@@ -75,6 +81,13 @@ const UNITS_CONFIG = {
       "c": { "name": "Celsius" },
       "f": { "name": "Fahrenheit" },
       "k": { "name": "Kelvin" }
+    },
+    "funUnits": {
+      "r": { "name": "Rankine (°R)" },
+      "re": { "name": "Réaumur (°Ré)" },
+      "n": { "name": "Newton (°N)" },
+      "de": { "name": "Delisle (°De)" },
+      "ro": { "name": "Rømer (°Rø)" }
     }
   },
   "area": {
@@ -97,7 +110,9 @@ const UNITS_CONFIG = {
       "footballfield": { "name": "Football Fields", "toBase": 5351 },
       "tenniscourt": { "name": "Tennis Courts", "toBase": 261 },
       "centralpark": { "name": "Central Parks", "toBase": 3410000 },
-      "parkingspot": { "name": "Parking Spots", "toBase": 15 }
+      "parkingspot": { "name": "Parking Spots", "toBase": 15 },
+      "postit": { "name": "Sticky Notes (3×3 in)", "toBase": 0.00580644 },
+      "a4sheet": { "name": "A4 Sheets", "toBase": 0.06237 }
     }
   },
   "volume": {
@@ -123,7 +138,9 @@ const UNITS_CONFIG = {
     "funUnits": {
       "olympicpool": { "name": "Olympic Pools", "toBase": 2500000 },
       "bathtub": { "name": "Bathtubs", "toBase": 300 },
-      "teardrop": { "name": "Teardrops", "toBase": 0.000006 }
+      "teardrop": { "name": "Teardrops", "toBase": 0.000006 },
+      "coffeemug": { "name": "Coffee Mugs (350ml)", "toBase": 0.35 },
+      "soda": { "name": "Soda Cans (330ml)", "toBase": 0.33 }
     }
   },
   "speed": {
@@ -144,7 +161,9 @@ const UNITS_CONFIG = {
       "runner": { "name": "Sprinting Humans", "toBase": 10.44 },
       "cheetah": { "name": "Cheetahs", "toBase": 33.5 },
       "sloth": { "name": "Sloths", "toBase": 0.04 },
-      "snail": { "name": "Garden Snails", "toBase": 0.001 }
+      "snail": { "name": "Garden Snails", "toBase": 0.001 },
+      "pigeon": { "name": "Pigeons (cruising)", "toBase": 16.7 },
+      "walk": { "name": "Brisk Walking Humans", "toBase": 1.4 }
     }
   },
   "time": {
@@ -167,7 +186,8 @@ const UNITS_CONFIG = {
     "funUnits": {
       "blink": { "name": "Eye Blinks", "toBase": 0.15 },
       "heartbeat": { "name": "Heartbeats", "toBase": 0.86 },
-      "dogyear": { "name": "Dog Years", "toBase": 220752000 }
+      "dogyear": { "name": "Dog Years", "toBase": 220752000 },
+      "microwave": { "name": "Microwave Minutes", "toBase": 75 }
     }
   },
   "energy": {
@@ -189,7 +209,9 @@ const UNITS_CONFIG = {
     "funUnits": {
       "lightning": { "name": "Lightning Bolts", "toBase": 1000000000 },
       "tnt": { "name": "Tons of TNT", "toBase": 4184000000 },
-      "aabattery": { "name": "AA Batteries", "toBase": 9360 }
+      "aabattery": { "name": "AA Batteries", "toBase": 9360 },
+      "espresso": { "name": "Espresso Shots (≈ 200 kJ)", "toBase": 200000 },
+      "phonecharge": { "name": "Phone Charges (≈ 12 Wh)", "toBase": 43200 }
     }
   },
   "power": {
@@ -205,6 +227,14 @@ const UNITS_CONFIG = {
       "hp": { "name": "Horsepower", "toBase": 745.7 },
       "btuh": { "name": "BTU/Hour", "toBase": 0.293071 },
       "ftlbs": { "name": "Foot-Pounds/Second", "toBase": 1.35582 }
+    },
+    "funUnits": {
+      "human": { "name": "Humans (resting, ~100W)", "toBase": 100 },
+      "lightbulb60": { "name": "60W Light Bulbs", "toBase": 60 },
+      "toaster": { "name": "Toasters (~1kW)", "toBase": 1000 },
+      "kettle": { "name": "Electric Kettles (~2.4kW)", "toBase": 2400 },
+      "hairdryer": { "name": "Hair Dryers (~1.8kW)", "toBase": 1800 },
+      "serversocket": { "name": "Server PSUs (~750W)", "toBase": 750 }
     }
   },
   "pressure": {
@@ -221,6 +251,13 @@ const UNITS_CONFIG = {
       "atm": { "name": "Atmospheres", "toBase": 101325 },
       "mmhg": { "name": "mmHg", "toBase": 133.322 },
       "torr": { "name": "Torr", "toBase": 133.322 }
+    },
+    "funUnits": {
+      "cartire": { "name": "Car Tires (~32 psi)", "toBase": 220632.32 },
+      "biketire": { "name": "Bike Tires (~80 psi)", "toBase": 551580.8 },
+      "espresso9bar": { "name": "Espresso Machines (9 bar)", "toBase": 900000 },
+      "champagne": { "name": "Champagne Bottles (~6 bar)", "toBase": 600000 },
+      "mariana": { "name": "Mariana Trench (≈ 1100 bar)", "toBase": 110000000 }
     }
   },
   "frequency": {
@@ -235,6 +272,14 @@ const UNITS_CONFIG = {
       "mhz": { "name": "Megahertz", "toBase": 1000000 },
       "ghz": { "name": "Gigahertz", "toBase": 1000000000 },
       "rpm": { "name": "RPM", "toBase": 0.0166667 }
+    },
+    "funUnits": {
+      "eu_mains": { "name": "EU Mains Hum (50Hz)", "toBase": 50 },
+      "us_mains": { "name": "US Mains Hum (60Hz)", "toBase": 60 },
+      "clock": { "name": "A Loud Tick-Tock (1Hz)", "toBase": 1 },
+      "heartbeat_hz": { "name": "Heartbeats (~1.2Hz)", "toBase": 1.2 },
+      "a4": { "name": "Concert A (A4, 440Hz)", "toBase": 440 },
+      "middlec": { "name": "Middle C (≈261.626Hz)", "toBase": 261.626 }
     }
   },
   "data": {
@@ -259,7 +304,9 @@ const UNITS_CONFIG = {
       "floppy": { "name": "Floppy Disks", "toBase": 1474560 },
       "mp3song": { "name": "MP3 Songs", "toBase": 4194304 },
       "photo": { "name": "iPhone Photos", "toBase": 3145728 },
-      "cdrom": { "name": "CD-ROMs", "toBase": 734003200 }
+      "cdrom": { "name": "CD-ROMs", "toBase": 734003200 },
+      "pdf": { "name": "PDFs (typical, ~500KB)", "toBase": 512000 },
+      "novel": { "name": "Novels (plain text, ~1MB)", "toBase": 1048576 }
     }
   },
   "angle": {
@@ -275,6 +322,13 @@ const UNITS_CONFIG = {
       "arcmin": { "name": "Arc Minutes", "toBase": 0.0166667 },
       "arcsec": { "name": "Arc Seconds", "toBase": 0.000277778 },
       "turn": { "name": "Turns", "toBase": 360 }
+    },
+    "funUnits": {
+      "right": { "name": "Right Angles", "toBase": 90 },
+      "straight": { "name": "Straight Angles", "toBase": 180 },
+      "pizza8": { "name": "Pizza Slices (8-slice)", "toBase": 45 },
+      "clockhour": { "name": "Clock Hours", "toBase": 30 },
+      "clockminute": { "name": "Clock Minutes", "toBase": 6 }
     }
   },
   "fuel": {
@@ -288,7 +342,14 @@ const UNITS_CONFIG = {
       "kml": { "name": "Km per Liter", "toBase": 1 },
       "mpg": { "name": "Miles per Gallon (US)", "toBase": 0.425144 },
       "mpgimp": { "name": "Miles per Gallon (UK)", "toBase": 0.354006 },
-      "lper100km": { "name": "Liters per 100km", "inverse": true }
+      "lper100km": { "name": "Liters per 100km", "inverse": true, "inverseDistanceKm": 100 }
+    },
+    "funUnits": {
+      "mi_per_l": { "name": "Miles per Liter", "toBase": 1.609344 },
+      "km_per_gal": { "name": "Kilometers per Gallon (US)", "toBase": 0.264172052 },
+      "lper100mi": { "name": "Liters per 100 miles", "inverse": true, "inverseDistanceKm": 160.9344 },
+      "scooter": { "name": "Scooters (≈ 35 km/L)", "toBase": 35 },
+      "citybus": { "name": "City Buses (≈ 3 km/L)", "toBase": 3 }
     }
   }
 };

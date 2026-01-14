@@ -79,7 +79,7 @@ function setupEventListeners() {
     fromSelect.addEventListener('change', convert);
     toSelect.addEventListener('change', convert);
     swapBtn.addEventListener('click', swap);
-    funToggle.addEventListener('click', toggleFunMode);
+    funToggle.addEventListener('change', toggleFunMode);
 }
 
 function smartConvert() {
@@ -92,8 +92,7 @@ function smartConvert() {
 }
 
 function toggleFunMode() {
-    funMode = !funMode;
-    funToggle.classList.toggle('active', funMode);
+    funMode = funToggle.checked;
     // Reload current type to update dropdowns
     loadConverterType(currentType);
 }
@@ -106,16 +105,6 @@ async function onTypeChange() {
 async function loadConverterType(type) {
     clearDropdowns();
     hideError();
-
-    // Show/hide fun toggle based on whether this type has fun units
-    const hasFunUnits = unitsConfig[type]?.funUnits;
-    funToggle.classList.toggle('visible', !!hasFunUnits);
-    
-    // Reset fun mode if switching to a type without fun units
-    if (!hasFunUnits && funMode) {
-        funMode = false;
-        funToggle.classList.remove('active');
-    }
 
     if (type === 'currency') {
         await loadCurrency();
@@ -181,19 +170,16 @@ async function fetchRate(from, to) {
 function loadUnits(type) {
     const config = unitsConfig[type];
 
-    // Add standard units
+    // Always add standard units
+    Object.entries(config.units).forEach(([code, unit]) => {
+        addOption(fromSelect, code, `${code} - ${unit.name}`);
+        addOption(toSelect, code, `${code} - ${unit.name}`);
+    });
+
+    // Add fun units only when fun mode is on AND this type has fun units
     if (funMode && config.funUnits) {
-        // Use optgroups when fun mode is on
-        addOptgroup(fromSelect, 'Standard', config.units);
-        addOptgroup(toSelect, 'Standard', config.units);
         addOptgroup(fromSelect, 'Fun 🎉', config.funUnits);
         addOptgroup(toSelect, 'Fun 🎉', config.funUnits);
-    } else {
-        // No optgroups when fun mode is off
-        Object.entries(config.units).forEach(([code, unit]) => {
-            addOption(fromSelect, code, `${code} - ${unit.name}`);
-            addOption(toSelect, code, `${code} - ${unit.name}`);
-        });
     }
 
     fromSelect.value = config.defaults.from;
@@ -248,22 +234,37 @@ function convertUnits(amount, from, to, type) {
 }
 
 function convertTemperature(amount, from, to) {
-    let celsius;
+    const toCelsius = {
+        c: (v) => v,
+        f: (v) => (v - 32) * 5 / 9,
+        k: (v) => v - 273.15,
+        // Real temperature scales (fun mode)
+        r: (v) => (v - 491.67) * 5 / 9, // Rankine
+        re: (v) => v * 1.25, // Réaumur
+        n: (v) => v * 100 / 33, // Newton
+        de: (v) => 100 - v * 2 / 3, // Delisle
+        ro: (v) => (v - 7.5) * 40 / 21 // Rømer
+    };
 
-    // Convert to Celsius first
-    switch (from) {
-        case 'c': celsius = amount; break;
-        case 'f': celsius = (amount - 32) * 5 / 9; break;
-        case 'k': celsius = amount - 273.15; break;
+    const fromCelsius = {
+        c: (c) => c,
+        f: (c) => c * 9 / 5 + 32,
+        k: (c) => c + 273.15,
+        r: (c) => (c + 273.15) * 9 / 5, // Rankine
+        re: (c) => c * 0.8, // Réaumur
+        n: (c) => c * 33 / 100, // Newton
+        de: (c) => (100 - c) * 3 / 2, // Delisle
+        ro: (c) => c * 21 / 40 + 7.5 // Rømer
+    };
+
+    const toC = toCelsius[from];
+    const fromC = fromCelsius[to];
+    if (!toC || !fromC) {
+        throw new Error(`Unsupported temperature unit: ${from} -> ${to}`);
     }
 
-    // Convert from Celsius to target
-    let result;
-    switch (to) {
-        case 'c': result = celsius; break;
-        case 'f': result = celsius * 9 / 5 + 32; break;
-        case 'k': result = celsius + 273.15; break;
-    }
+    const celsius = toC(amount);
+    const result = fromC(celsius);
 
     // Rate doesn't make sense for temperature, show formula instead
     return { result, rate: null, formula: getTemperatureFormula(from, to) };
@@ -276,20 +277,40 @@ function getTemperatureFormula(from, to) {
         'f_c': '(°F - 32) × 5/9',
         'f_k': '(°F - 32) × 5/9 + 273.15',
         'k_c': 'K - 273.15',
-        'k_f': '(K - 273.15) × 9/5 + 32'
+        'k_f': '(K - 273.15) × 9/5 + 32',
+        // Rankine (°R)
+        'c_r': '(°C + 273.15) × 9/5',
+        'r_c': '(°R - 491.67) × 5/9',
+        'f_r': '°F + 459.67',
+        'r_f': '°R - 459.67',
+        'k_r': 'K × 9/5',
+        'r_k': '°R × 5/9',
+        // Réaumur (°Ré)
+        'c_re': '°C × 0.8',
+        're_c': '°Ré × 1.25',
+        // Newton (°N)
+        'c_n': '°C × 33/100',
+        'n_c': '°N × 100/33',
+        // Delisle (°De)
+        'c_de': '(100 - °C) × 3/2',
+        'de_c': '100 - °De × 2/3',
+        // Rømer (°Rø)
+        'c_ro': '°C × 21/40 + 7.5',
+        'ro_c': '(°Rø - 7.5) × 40/21'
     };
     return formulas[`${from}_${to}`] || '';
 }
 
 function convertFuel(amount, from, to, config) {
-    const fromUnit = config.units[from];
-    const toUnit = config.units[to];
+    const fromUnit = getUnit(config, from);
+    const toUnit = getUnit(config, to);
 
     let kml; // km per liter as base
 
-    // Convert to km/l
+    // Convert to km/l (allow inverse units like L/100km and L/100mi)
     if (fromUnit.inverse) {
-        kml = 100 / amount;
+        const distanceKm = fromUnit.inverseDistanceKm || 100;
+        kml = distanceKm / amount;
     } else {
         kml = amount * fromUnit.toBase;
     }
@@ -297,7 +318,8 @@ function convertFuel(amount, from, to, config) {
     // Convert from km/l to target
     let result;
     if (toUnit.inverse) {
-        result = 100 / kml;
+        const distanceKm = toUnit.inverseDistanceKm || 100;
+        result = distanceKm / kml;
     } else {
         result = kml / toUnit.toBase;
     }
@@ -415,11 +437,11 @@ function formatNumber(num) {
         return '—';
     }
     // Scientific notation for very large numbers
-    if (Math.abs(num) >= 1e9) {
+    if (Math.abs(num) >= 1e7) {
         return num.toExponential(4);
     }
     // Formatted with commas for moderately large numbers
-    if (Math.abs(num) >= 1000000) {
+    if (Math.abs(num) >= 10000) {
         return num.toLocaleString('en-US', { maximumFractionDigits: 2 });
     }
     // Scientific notation for very small numbers
