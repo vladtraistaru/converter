@@ -3,37 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Converter</title>
+    <title>Converter</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Currency Converter</h1>
+        <h1>Converter</h1>
+
+        <div class="type-row">
+            <select id="converter-type" class="type-dropdown">
+                <!-- Populated dynamically from units-config.js -->
+            </select>
+        </div>
 
         <div class="converter-card">
-            <div class="input-group">
-                <label for="amount">Amount</label>
+            <div class="label-row">
+                <label class="row-label">From</label>
+                <button id="fun-toggle" class="fun-toggle">🎉 Fun</button>
+            </div>
+            <div class="value-row">
                 <input type="number" id="amount" value="1" min="0" step="any">
-                <select id="from-currency"></select>
+                <select id="from-currency" class="unit-select"></select>
             </div>
 
-            <button id="swap-btn" aria-label="Swap currencies">
+            <button id="swap-btn" aria-label="Swap units">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/>
                 </svg>
             </button>
 
-            <div class="result-group">
-                <label for="to-currency">Converted to</label>
+            <label class="row-label">To</label>
+            <div class="value-row">
                 <div id="result" class="result">0.00</div>
-                <select id="to-currency"></select>
+                <select id="to-currency" class="unit-select"></select>
             </div>
 
             <div id="rate-info" class="rate-info"></div>
             <div id="error" class="error"></div>
         </div>
+
+        <div id="comparison" class="comparison-panel"></div>
     </div>
 
+    <script src="units-config.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
