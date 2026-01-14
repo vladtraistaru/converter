@@ -55,6 +55,13 @@ const UNITS_CONFIG = {
       "lb": { "name": "Pounds", "toBase": 0.453592 },
       "oz": { "name": "Ounces", "toBase": 0.0283495 },
       "st": { "name": "Stones", "toBase": 6.35029 }
+    },
+    "funUnits": {
+      "elephant": { "name": "African Elephants", "toBase": 6000 },
+      "cat": { "name": "House Cats", "toBase": 4.5 },
+      "bowling": { "name": "Bowling Balls", "toBase": 6.35 },
+      "iphone": { "name": "iPhones", "toBase": 0.206 },
+      "bananaW": { "name": "Bananas", "toBase": 0.12 }
     }
   },
   "temperature": {
@@ -85,6 +92,12 @@ const UNITS_CONFIG = {
       "ac": { "name": "Acres", "toBase": 4046.8564 },
       "ft2": { "name": "Square Feet", "toBase": 0.092903 },
       "in2": { "name": "Square Inches", "toBase": 0.00064516 }
+    },
+    "funUnits": {
+      "footballfield": { "name": "Football Fields", "toBase": 5351 },
+      "tenniscourt": { "name": "Tennis Courts", "toBase": 261 },
+      "centralpark": { "name": "Central Parks", "toBase": 3410000 },
+      "parkingspot": { "name": "Parking Spots", "toBase": 15 }
     }
   },
   "volume": {
@@ -106,6 +119,11 @@ const UNITS_CONFIG = {
       "tsp": { "name": "Teaspoons", "toBase": 0.00492892 },
       "ft3": { "name": "Cubic Feet", "toBase": 28.3168 },
       "in3": { "name": "Cubic Inches", "toBase": 0.0163871 }
+    },
+    "funUnits": {
+      "olympicpool": { "name": "Olympic Pools", "toBase": 2500000 },
+      "bathtub": { "name": "Bathtubs", "toBase": 300 },
+      "teardrop": { "name": "Teardrops", "toBase": 0.000006 }
     }
   },
   "speed": {
@@ -121,6 +139,12 @@ const UNITS_CONFIG = {
       "kn": { "name": "Knots", "toBase": 0.514444 },
       "fts": { "name": "Feet/Second", "toBase": 0.3048 },
       "mach": { "name": "Mach", "toBase": 343 }
+    },
+    "funUnits": {
+      "runner": { "name": "Sprinting Humans", "toBase": 10.44 },
+      "cheetah": { "name": "Cheetahs", "toBase": 33.5 },
+      "sloth": { "name": "Sloths", "toBase": 0.04 },
+      "snail": { "name": "Garden Snails", "toBase": 0.001 }
     }
   },
   "time": {
@@ -139,6 +163,11 @@ const UNITS_CONFIG = {
       "ms": { "name": "Milliseconds", "toBase": 0.001 },
       "us": { "name": "Microseconds", "toBase": 0.000001 },
       "ns": { "name": "Nanoseconds", "toBase": 0.000000001 }
+    },
+    "funUnits": {
+      "blink": { "name": "Eye Blinks", "toBase": 0.15 },
+      "heartbeat": { "name": "Heartbeats", "toBase": 0.86 },
+      "dogyear": { "name": "Dog Years", "toBase": 220752000 }
     }
   },
   "energy": {
@@ -156,6 +185,11 @@ const UNITS_CONFIG = {
       "kwh": { "name": "Kilowatt Hours", "toBase": 3600000 },
       "btu": { "name": "BTU", "toBase": 1055.06 },
       "ev": { "name": "Electron Volts", "toBase": 1.60218e-19 }
+    },
+    "funUnits": {
+      "lightning": { "name": "Lightning Bolts", "toBase": 1000000000 },
+      "tnt": { "name": "Tons of TNT", "toBase": 4184000000 },
+      "aabattery": { "name": "AA Batteries", "toBase": 9360 }
     }
   },
   "power": {
@@ -220,6 +254,12 @@ const UNITS_CONFIG = {
       "kbit": { "name": "Kilobits", "toBase": 128 },
       "mbit": { "name": "Megabits", "toBase": 131072 },
       "gbit": { "name": "Gigabits", "toBase": 134217728 }
+    },
+    "funUnits": {
+      "floppy": { "name": "Floppy Disks", "toBase": 1474560 },
+      "mp3song": { "name": "MP3 Songs", "toBase": 4194304 },
+      "photo": { "name": "iPhone Photos", "toBase": 3145728 },
+      "cdrom": { "name": "CD-ROMs", "toBase": 734003200 }
     }
   },
   "angle": {
