@@ -2,6 +2,7 @@ services:
   converter:
     image: ghcr.io/vladtraistaru/converter:latest
     container_name: converter
+    mem_limit: 64m
     restart: unless-stopped
     networks: [proxy]
 networks:
